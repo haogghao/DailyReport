@@ -1,3 +1,5 @@
 eclipse.preferences.version=1
+encoding//src/com/CsvToExcel.java=UTF-8
+encoding//src/com/Datetime.java=UTF-8
 encoding//src/com/ExcelImage.java=UTF-8
 encoding//src/com/ExcelWrite.java=UTF-8
