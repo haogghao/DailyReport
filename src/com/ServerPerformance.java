@@ -16,16 +16,12 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-public class CsvToExcel {
-    public static void main(String[] args) throws IOException {
-        // 读取csv文件
-    	String csvPath = "D:/DailyReportResouceFiles/20170907/CS2-ACZ-COSCON-PROD.csv";  
-    	String excelPath="D://21.xlsx";
-        BufferedReader br = null;  
+public class ServerPerformance {
+	public void addServerPerformance(String excelPath,String csvPath)  throws IOException {
+		BufferedReader br = null;  
         String line ="";  
         String csvSplitBy = ",(?=([^\"]*\"[^\"]*\")*[^\"]*$)";
         
-
         PrintWriter writer_path = null;  
         List<List<String>>  dataList= new ArrayList<List<String>>();
         try {  
@@ -56,7 +52,7 @@ public class CsvToExcel {
         FileInputStream fis = new FileInputStream(excelPath); 
         XSSFWorkbook wb = new XSSFWorkbook(fis);
         //声明一个单子并命名
-        XSSFSheet sheet = wb.getSheet("UserSync");
+        XSSFSheet sheet = wb.getSheet("ServerPerformance");
         //给单子名称一个长度
         sheet.setDefaultColumnWidth((short)15);
         for (int i = 0; i < dataList.size(); i++) {
@@ -75,5 +71,6 @@ public class CsvToExcel {
         wb.write(out);
         out.flush();
         out.close();
-    }
+		
+	}
 }

@@ -14,8 +14,8 @@ import org.apache.poi.xssf.usermodel.XSSFDrawing;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-public class ExcelImage {  
-	public void addNetwork(String targetFile,String sheetName) throws IOException{
+public class Throughout {  
+	public void addThroughout(String excelPath,String sheetName) throws IOException{
 		FileOutputStream fileOut = null;     
         BufferedImage bufferImg = null;     
        //先把读进来的图片放到一个ByteArrayOutputStream中，以便产生ByteArray    
@@ -24,7 +24,7 @@ public class ExcelImage {
            bufferImg = ImageIO.read(new File("D:/DailyReportResouceFiles/20170912/CT2.png"));     
            ImageIO.write(bufferImg, "png", byteArrayOut);  //指定图片格式
              
-       	   FileInputStream fis = new FileInputStream(targetFile); 
+       	   FileInputStream fis = new FileInputStream(excelPath); 
            XSSFWorkbook wb = new XSSFWorkbook(fis);  
            XSSFSheet sheet1 = wb.getSheet(sheetName);   
            //画图的顶级管理器，一个sheet只能获取一个（一定要注意这点）  
@@ -40,7 +40,7 @@ public class ExcelImage {
            patriarch.createPicture(anchor, wb.addPicture(byteArrayOut.toByteArray(), XSSFWorkbook.PICTURE_TYPE_PNG));
            patriarch.createPicture(anchor1, wb.addPicture(byteArrayOut.toByteArray(), XSSFWorkbook.PICTURE_TYPE_PNG)); 
            patriarch.createPicture(anchor2, wb.addPicture(byteArrayOut.toByteArray(), XSSFWorkbook.PICTURE_TYPE_PNG));
-           fileOut = new FileOutputStream("D:/2.xlsx");     
+           fileOut = new FileOutputStream(excelPath);     //实际保存的地方,不要写错
            // 写入excel文件     
             wb.write(fileOut);     
             System.out.println("----BC,BL,CT图片插入成功------");  
@@ -57,13 +57,4 @@ public class ExcelImage {
        }  
 		
 	}
-    public static void main(String[] args) {  
-    	ExcelImage EI=new ExcelImage();
-    	try {
-			EI.addNetwork("d:/22.xlsx", "Network");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    }  
 }  

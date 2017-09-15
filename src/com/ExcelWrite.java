@@ -4,6 +4,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -11,36 +13,20 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ExcelWrite {
-    /** 
-     * 删除指定的Sheet 
-     * @param targetFile  目标文件 
-     * @param sheetName   Sheet名称 
-     */ 
-    public void deleteSheet(String targetFile,String sheetName) { 
+	public void clearSheet(String targetFile,String sheetName) { 
         try { 
             FileInputStream fis = new FileInputStream(targetFile); 
             XSSFWorkbook wb = new XSSFWorkbook(fis); 
-            //wb.createSheet("gungun");
-            XSSFSheet ws = wb.getSheetAt(1);
-            //XSSFSheet ws = wb.getSheet(sheetName);
-            //wb.removeSheetAt(wb.getSheetIndex(sheetName)); 
+            XSSFSheet ws = wb.getSheet(sheetName);
+            wb.removeSheetAt(wb.getSheetIndex(sheetName)); 
+            wb.createSheet(sheetName);
             this.fileWrite(targetFile, wb); 
             fis.close(); 
         } catch (Exception e) { 
             e.printStackTrace(); 
         } 
     }  
-    public void createSheet(String targetFile,String sheetName) { 
-        try { 
-        	FileInputStream fis = new FileInputStream(targetFile); 
-            XSSFWorkbook wb = new XSSFWorkbook(fis);
-            wb.createSheet(sheetName);
-            this.fileWrite(targetFile, wb); 
-            fis.close();
-        } catch (Exception e) { 
-            e.printStackTrace(); 
-        } 
-    }
+
     /** 
      * 写删除后的Excel文件 
      * @param targetFile  目标文件 
@@ -53,10 +39,35 @@ public class ExcelWrite {
         fileOut.flush(); 
         fileOut.close(); 
     }
-   public static void main(String[] args) { 
+		
+   public static void main(String[] args) throws IOException {
+	  //当天日期
+       Date date = new Date();  
+       SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");  
+       String today = sdf.format(date);  
+       System.out.println("今天:" + today);
+       
+       //前一天日期
+       Date as = new Date(date.getTime()-24*60*60*1000); //这里可以写入参数
+       SimpleDateFormat matter1 = new SimpleDateFormat("yyyyMMdd");
+       String yesterday = matter1.format(as);
+       System.out.println("昨天:"+yesterday);
+	   
         ExcelWrite ew = new ExcelWrite(); 
-        ew.createSheet("d:/22.xlsx", "baba");
-        ew.deleteSheet("d:/22.xlsx", "Network");
-        System.out.println("成功");
+        String excelPath="D:/DailyReportResouceFiles/Report/22.xlsx";
+        String csvPath = "D:/DailyReportResouceFiles/20170912/CS2-ACZ-COSCON-PROD.csv";  
+     //清楚Throughout,ServerPerformance and Network
+//        ew.clearSheet(excelPath, "Throughout");//ServerPerformance
+//        ew.clearSheet(excelPath, "ServerPerformance");
+//        ew.clearSheet(excelPath, "Network");
+     //插入Throughout   
+//        Throughout th=new Throughout();
+//        th.addThroughout(excelPath, "Throughout");
+     //插入ServerPerformance
+//        ServerPerformance sp=new ServerPerformance();
+//        sp.addServerPerformance(excelPath, csvPath);
+        
+        
+        
     }
 }
