@@ -1,18 +1,16 @@
 package com;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ExcelWrite {
+    public static String excelPath="D:/DailyReportResourceFiles/Report/22.xlsx";
 	public void clearSheet(String targetFile,String sheetName) { 
         try { 
             FileInputStream fis = new FileInputStream(targetFile); 
@@ -26,7 +24,6 @@ public class ExcelWrite {
             e.printStackTrace(); 
         } 
     }  
-
     /** 
      * 写删除后的Excel文件 
      * @param targetFile  目标文件 
@@ -38,34 +35,37 @@ public class ExcelWrite {
         wb.write(fileOut); 
         fileOut.flush(); 
         fileOut.close(); 
-    }
-		
+    }	
    public static void main(String[] args) throws IOException {
-	  //当天日期
-       Date date = new Date();  
-       SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");  
-       String today = sdf.format(date);  
-       System.out.println("今天:" + today);
-       
-       //前一天日期
-       Date as = new Date(date.getTime()-24*60*60*1000); //这里可以写入参数
-       SimpleDateFormat matter1 = new SimpleDateFormat("yyyyMMdd");
-       String yesterday = matter1.format(as);
-       System.out.println("昨天:"+yesterday);
+//	  //当天日期
+//       Date date = new Date();  
+//       SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");  
+//       String today = sdf.format(date);  
+//       
+//       //前一天日期
+//       Date as = new Date(date.getTime()-24*60*60*1000); //这里可以写入参数
+//       SimpleDateFormat matter1 = new SimpleDateFormat("yyyyMMdd");
+//	   SimpleDateFormat matter2 = new SimpleDateFormat("yyyy-MM-dd");
+//       String yesterday = matter1.format(as);
+// 	   String ytd = matter2.format(as);
 	   
-        ExcelWrite ew = new ExcelWrite(); 
-        String excelPath="D:/DailyReportResouceFiles/Report/22.xlsx";
-        String csvPath = "D:/DailyReportResouceFiles/20170912/CS2-ACZ-COSCON-PROD.csv";  
-     //清楚Throughout,ServerPerformance and Network
+//        ExcelWrite ew = new ExcelWrite(); 
+//        String yesterday="20170912";
+//        String ytd="2017-09-13";
+        
+//       //解压zip文件          
+//        UnZipFile zf=new UnZipFile();
+//        zf.unZipFiles(yesterday);
+//      //清楚Throughout,ServerPerformance and Network
 //        ew.clearSheet(excelPath, "Throughout");//ServerPerformance
 //        ew.clearSheet(excelPath, "ServerPerformance");
 //        ew.clearSheet(excelPath, "Network");
-     //插入Throughout   
+//     //插入Throughout   
 //        Throughout th=new Throughout();
-//        th.addThroughout(excelPath, "Throughout");
-     //插入ServerPerformance
+//        th.addThroughout(excelPath, "Throughout",yesterday);
+//     //插入ServerPerformance
 //        ServerPerformance sp=new ServerPerformance();
-//        sp.addServerPerformance(excelPath, csvPath);
+//        sp.addServerPerformance(excelPath, yesterday,ytd);
         
         
         
