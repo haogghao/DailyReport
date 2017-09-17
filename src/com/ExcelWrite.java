@@ -141,25 +141,25 @@ public class ExcelWrite {
 //       String yesterday = matter1.format(as);
 // 	     String ytd = matter2.format(as);
 	   
-        ExcelWrite ew = new ExcelWrite(); 
-        String yesterday="20170912";
-        String ytd="2017-09-13";
+//        ExcelWrite ew = new ExcelWrite(); 
+//        String yesterday="20170912";
+//        String ytd="2017-09-13";
         
 //       //解压zip文件          
 //        UnZipFile zf=new UnZipFile();
 //        zf.unZipFiles(yesterday);
 //      //清楚Throughout,ServerPerformance and Network,Shipments
-//	      ew.clearSheet(excelPath, "UserSync");
-        ew.clearSheet(excelPath, "Shipments");
-        ew.clearSheet(excelPath, "Throughout");//ServerPerformance
-        ew.clearSheet(excelPath, "ServerPerformance");
-        ew.clearSheet(excelPath, "Network");
-     //插入Throughout   
-        Throughout th=new Throughout();
-        th.addThroughout(excelPath, "Throughout",yesterday);
-     //插入ServerPerformance
-        ServerPerformance sp=new ServerPerformance();
-        sp.addServerPerformance(excelPath, yesterday,ytd);
+//	    ew.clearSheet(excelPath, "UserSync");
+//        ew.clearSheet(excelPath, "Shipments");
+//        ew.clearSheet(excelPath, "Throughout");//ServerPerformance
+//        ew.clearSheet(excelPath, "ServerPerformance");
+//        ew.clearSheet(excelPath, "Network");
+//     //插入Throughout   
+//        Throughout th=new Throughout();
+//        th.addThroughout(excelPath, "Throughout",yesterday);
+//     //插入ServerPerformance
+//        ServerPerformance sp=new ServerPerformance();
+//        sp.addServerPerformance(excelPath, yesterday,ytd);
         
         
         
