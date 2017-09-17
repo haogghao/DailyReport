@@ -49,19 +49,25 @@ public class ExcelWrite {
             	for(int i=4;i<=13;i++){
             		XSSFRow tempRow = ws.getRow(i);
             		for(int j=6;j<=13;j++){
-            			tempRow.createCell(j).setCellValue("");
+            			XSSFCell xc=tempRow.createCell(j);
+            			xc.setCellStyle(style);
+            			xc.setCellValue("");
             		}
             	}
             	for(int i=18;i<=29;i++){
             		XSSFRow tempRow = ws.createRow(i);
             		for(int j=1;j<=13;j++){
-            			tempRow.createCell(j).setCellValue("");
+            			XSSFCell xc=tempRow.createCell(j);
+            			xc.setCellStyle(style);
+            			xc.setCellValue("");
             		}
             	}
             	for(int i=32;i<=41;i++){
             		XSSFRow tempRow = ws.createRow(i);
             		for(int j=1;j<=3;j++){
-            			tempRow.createCell(j).setCellValue("");
+            			XSSFCell xc=tempRow.createCell(j);
+            			xc.setCellStyle(style);
+            			xc.setCellValue("");
             		}
             	}	
             }else if(sheetName.equals("Shipments")){
@@ -128,7 +134,7 @@ public class ExcelWrite {
         fileOut.flush(); 
         fileOut.close(); 
     }	
-   public static void main(String[] args) throws IOException {
+   public static void main(String[] args) throws Exception {
 //	  //当天日期
 //       Date date = new Date();  
 //       SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");  
@@ -141,7 +147,7 @@ public class ExcelWrite {
 //       String yesterday = matter1.format(as);
 // 	     String ytd = matter2.format(as);
 	   
-//        ExcelWrite ew = new ExcelWrite(); 
+        ExcelWrite ew = new ExcelWrite(); 
 //        String yesterday="20170912";
 //        String ytd="2017-09-13";
         
@@ -149,7 +155,7 @@ public class ExcelWrite {
 //        UnZipFile zf=new UnZipFile();
 //        zf.unZipFiles(yesterday);
 //      //清楚Throughout,ServerPerformance and Network,Shipments
-//	    ew.clearSheet(excelPath, "UserSync");
+	    ew.clearSheet(excelPath, "UserSync");
 //        ew.clearSheet(excelPath, "Shipments");
 //        ew.clearSheet(excelPath, "Throughout");//ServerPerformance
 //        ew.clearSheet(excelPath, "ServerPerformance");
@@ -160,8 +166,10 @@ public class ExcelWrite {
 //     //插入ServerPerformance
 //        ServerPerformance sp=new ServerPerformance();
 //        sp.addServerPerformance(excelPath, yesterday,ytd);
-        
-        
-        
+       //插入Shipments
+//		Shipments sp=new Shipments();
+//		sp.writeShipments(excelPath,"Shipments",5);
+       //插入UserSync
+	   
     }
 }

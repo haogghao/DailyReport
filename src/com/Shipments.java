@@ -1,11 +1,9 @@
 package com;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -100,9 +98,8 @@ public class Shipments {
         }else{
         	System.out.println("dayNum error");
         }
+        
         column2=2*column1+1;
-        
-        
         for(int i=7;i<=11;i++){
         	XSSFRow xf=targetWs.getRow(i);
         	xf.getCell(column1).setCellValue(data[i-7]);
@@ -110,17 +107,12 @@ public class Shipments {
         for(int i=18;i<=22;i++){
         	XSSFRow xf=targetWs.getRow(i);
         	xf.getCell(column2).setCellValue(data[i-13]);
-        }
+        }   
         
-        for(int i=0;i<data.length;i++){
-        	System.out.println(data[i]);
-        }
+        //保存修改,关闭
             this.fileWrite(excelPath, wb); 
             fis.close(); 
-
     }  
-	
-
     /** 
      * 写删除后的Excel文件 
      * @param targetFile  目标文件 
@@ -132,16 +124,6 @@ public class Shipments {
         wb.write(fileOut); 
         fileOut.flush(); 
         fileOut.close(); 
-    }
-	
-	/**
-	 * @param args
-	 * @throws Exception 
-	 */
-	public static void main(String[] args) throws Exception {
-		// TODO Auto-generated method stub
-		Shipments sp=new Shipments();
-		sp.writeShipments("D:/DailyReportResourceFiles/Report/22.xlsx","Shipments",5);
-	}
+    }	
 
 }
