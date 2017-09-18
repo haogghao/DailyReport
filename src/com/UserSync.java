@@ -27,7 +27,7 @@ public class UserSync {
             		temp[i][1]=xr.getCell(1).getStringCellValue();
             		temp[i][2]=xr.getCell(2).getStringCellValue();	
             }
-            System.out.println(temp[1][0]+"  "+temp[1][1]+" "+temp[1][2]);
+           
             //–¥»ÎUserSync
             FileInputStream fis = new FileInputStream(excelPath); 
             XSSFWorkbook wb = new XSSFWorkbook(fis); 
@@ -108,19 +108,4 @@ public class UserSync {
         fileOut.flush(); 
         fileOut.close(); 
     }	
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		UserSync us=new UserSync();
-		us.writeUserSync("D:/DailyReportResouceFiles/Report/22.xlsx","UserSync",5);
-//		us.writeUserSync("D:/DailyReportResouceFiles/Report/22.xlsx","UserSync",1);
-//		us.writeUserSync("D:/DailyReportResouceFiles/Report/22.xlsx","UserSync",2);
-//		us.writeUserSync("D:/DailyReportResouceFiles/Report/22.xlsx","UserSync",3);
-//		us.writeUserSync("D:/DailyReportResouceFiles/Report/22.xlsx","UserSync",4);
-//		us.writeUserSync("D:/DailyReportResouceFiles/Report/22.xlsx","UserSync",6);
-//		us.writeUserSync("D:/DailyReportResouceFiles/Report/22.xlsx","UserSync",7);
-	}
-
 }

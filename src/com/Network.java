@@ -26,6 +26,9 @@ public class Network {
         }
         String pic5minPath=picturePath+"/COSCON Network Utilization/5min.png";
         String pic30minPath=picturePath+"/COSCON Network Utilization/30min.png";
+        String dateTile="2017/Sep/08 COSCON 10M lease line usage : < 25%";
+        String title5="Daily (5 minutes average)";
+        String title30="Weekly (30 minutes average)";
         int row1,column1,row2,column2,row3,column3,row4,column4;
         if(days>4){
         	row1=2;column1=(days-5)*10;
@@ -75,20 +78,4 @@ public class Network {
        }  
 		
 	}
-	
-	   public static void main(String[] args) throws IOException{
-		   String excelPath="D:/DailyReportResouceFiles/Report/22.xlsx";
-		   String picturePath="D:/DailyReportResouceFiles/201709132";
-		   String sheetName="Network";
-		   Network nw=new Network();
-		   nw.addNetwork(excelPath, picturePath, sheetName,1);
-		   nw.addNetwork(excelPath, picturePath, sheetName,2);
-		   nw.addNetwork(excelPath, picturePath, sheetName,3);
-		   nw.addNetwork(excelPath, picturePath, sheetName,4);
-		   nw.addNetwork(excelPath, picturePath, sheetName,5);
-		   nw.addNetwork(excelPath, picturePath, sheetName,6);
-		   nw.addNetwork(excelPath, picturePath, sheetName,7);
-		   
-		   
-	   }
 }

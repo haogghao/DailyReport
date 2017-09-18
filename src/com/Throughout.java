@@ -20,7 +20,7 @@ public class Throughout {
         BufferedImage bufferImgBC = null; 
         BufferedImage bufferImgBL = null;
         BufferedImage bufferImgCT = null;
-        String BCBLBCPath="D:/DailyReportResourceFiles/"+yesterday;
+        String BCBLBCPath="D:/DailyReportResouceFiles/"+yesterday;
         File f=new File(BCBLBCPath);
         if(!f.exists()){
         	System.out.println("BC BL CT picture path"+BCBLBCPath+" does not exits");

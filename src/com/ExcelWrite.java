@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -21,6 +22,10 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ExcelWrite {
     public static String excelPath="D:/DailyReportResouceFiles/Report/22.xlsx";
+    public static String picturePath="D:/DailyReportResouceFiles/20170912";
+    public static Calendar cal = Calendar.getInstance();  
+	//public static int whichDay = cal.get(Calendar.DAY_OF_WEEK)-1;
+	
 	public void clearSheet(String excelPath,String sheetName) {
         try { 
             FileInputStream fis = new FileInputStream(excelPath); 
@@ -43,8 +48,7 @@ public class ExcelWrite {
             dateStyle.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
             dateStyle.setFillForegroundColor(HSSFColor.YELLOW.index);
             
-            
-            if(sheetName.equals("UserSync")){//清空数据及样式
+            if(sheetName.equals("UserSync")){//clear data and style
             	System.out.println("UserSync");
             	
             	for(int i=4;i<=13;i++){
@@ -73,6 +77,23 @@ public class ExcelWrite {
             			xc.setCellValue("");
             		}
             	}	
+            	
+            	//write the time
+            	DateFormat df = new SimpleDateFormat("dd-MMM",Locale.ENGLISH);
+            	long dt=new Date().getTime();
+            	XSSFRow tempRow2 = ws.createRow(2);
+            	XSSFRow tempRow16 = ws.createRow(16);
+            	XSSFRow tempRow30 = ws.createRow(30);
+            	
+            	tempRow2.createCell(0).setCellValue(df.format(dt-3*24*60*60*1000));
+            	tempRow2.createCell(6).setCellValue(df.format(dt-2*24*60*60*1000));
+            	tempRow2.createCell(10).setCellValue(df.format(dt-1*24*60*60*1000));
+            	
+            	tempRow16.createCell(0).setCellValue(df.format(dt));
+            	tempRow16.createCell(6).setCellValue(df.format(dt+1*24*60*60*1000));
+            	tempRow16.createCell(10).setCellValue(df.format(dt+2*24*60*60*1000));
+            	
+            	tempRow30.createCell(0).setCellValue(df.format(dt+3*24*60*60*1000));
             }else if(sheetName.equals("Shipments")){
             	long date = new Date().getTime();
             	
@@ -150,29 +171,55 @@ public class ExcelWrite {
 //       String yesterday = matter1.format(as);
 // 	     String ytd = matter2.format(as);
 	   
-        ExcelWrite ew = new ExcelWrite(); 
-//        String yesterday="20170912";
-//        String ytd="2017-09-13";
-        
-//       //解压zip文件          
-//        UnZipFile zf=new UnZipFile();
-//        zf.unZipFiles(yesterday);
-//      //清楚Throughout,ServerPerformance and Network,Shipments
-	    ew.clearSheet(excelPath, "UserSync");
-//        ew.clearSheet(excelPath, "Shipments");
-//        ew.clearSheet(excelPath, "Throughout");//ServerPerformance
-//        ew.clearSheet(excelPath, "ServerPerformance");
-//        ew.clearSheet(excelPath, "Network");
-//     //插入Throughout   
-//        Throughout th=new Throughout();
-//        th.addThroughout(excelPath, "Throughout",yesterday);
-//     //插入ServerPerformance
-//        ServerPerformance sp=new ServerPerformance();
-//        sp.addServerPerformance(excelPath, yesterday,ytd);
-       //插入Shipments
-//		Shipments sp=new Shipments();
-//		sp.writeShipments(excelPath,"Shipments",5);
-       //插入UserSync
+	 int whichDay=5;
 	   
+	 ExcelWrite ew = new ExcelWrite();
+     String yesterday="20170912";
+     String ytd="2017-09-12";
+     
+    //解压zip文件          
+     UnZipFile zf=new UnZipFile();
+     zf.unZipFiles(yesterday);
+	   if(whichDay==5){//yesterday is Friday,we need to clear the tables
+//	      //清楚Throughout,ServerPerformance and Network,Shipments
+		    ew.clearSheet(excelPath, "UserSync");
+	        ew.clearSheet(excelPath, "Shipments");
+	        ew.clearSheet(excelPath, "Throughout");//ServerPerformance
+	        ew.clearSheet(excelPath, "ServerPerformance");
+	        ew.clearSheet(excelPath, "Network");
+	   }
+	   //插入UserSync
+		UserSync us=new UserSync();
+		us.writeUserSync(excelPath,"UserSync",whichDay);
+	   
+       //插入Shipments
+		Shipments sm=new Shipments();
+		sm.writeShipments(excelPath,"Shipments",whichDay);
+	   
+      //插入ServerPerformance
+        ServerPerformance sp=new ServerPerformance();
+        sp.addServerPerformance(excelPath, yesterday,ytd);
+      //Network
+		Network nw=new Network();
+		nw.addNetwork(excelPath, picturePath, "Network",whichDay);
+        
+      //插入Throughout   
+        Throughout th=new Throughout();
+        th.addThroughout(excelPath, "Throughout",yesterday);
+
+
+      
+//		HSSFWorkbook wb = new HSSFWorkbook();       
+//		HSSFSheet sheet = wb.createSheet("row sheet");       
+//		// Create various cells and rows for spreadsheet.        
+//		// Shift rows 6 - 11 on the spreadsheet to the top (rows 0 - 5)        
+//		sheet.shiftRows(5, 10, -5);      
+//		HSSFWorkbook wb = new HSSFWorkbook();     
+//		HSSFSheet sheet = wb.createSheet("row sheet");     
+//		// Create various cells and rows for spreadsheet.     
+//		// Shift rows 6 - 11 on the spreadsheet to the top (rows 0 - 5)     
+//		sheet.shiftRows(5, 10, -5); 
+		
+		
     }
 }

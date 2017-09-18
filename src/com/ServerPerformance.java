@@ -21,7 +21,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class ServerPerformance {
 	public void addServerPerformance(String excelPath,String yesterday,String ytd)  throws IOException {
 		BufferedReader br = null;  
-		String csvPath = "D:/DailyReportResourceFiles/"+yesterday+"/CS2-ACZ-COSCON-PROD.csv";
+		String csvPath = "D:/DailyReportResouceFiles/"+yesterday+"/CS2-ACZ-COSCON-PROD.csv";
         File f=new File(csvPath);
         if(!f.exists()){
         	System.out.println("csvPath :"+csvPath+" does not exits");

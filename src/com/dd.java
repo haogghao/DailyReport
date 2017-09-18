@@ -13,18 +13,9 @@ public class dd {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-//		Date d=new Date();
-//		SimpleDateFormat sf=new SimpleDateFormat("MMM d, yyy");
-//		String ss=sf.format(d);
-//		System.out.println(ss);
-
-		DateFormat df = new SimpleDateFormat("dd-MMM",Locale.ENGLISH);
-		String timeStr=df.format(new Date().getTime()-24*60*60*1000);
-        System.out.println(timeStr);
-        for(int i=3;i<=15;i+=2){
-        	int j=(i/2)-4;
-        	System.out.println(j);
-        }
+		Calendar cal = Calendar.getInstance(); 
+		int whichDay1 = cal.get(Calendar.DAY_OF_WEEK);
+	 System.out.println(whichDay1);
 	}
 
 }

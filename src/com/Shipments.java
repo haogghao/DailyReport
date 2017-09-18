@@ -21,10 +21,10 @@ public class Shipments {
 	}
 
 	public void writeShipments(String excelPath,String sheetName,int dayNum) throws Exception { 
-		String SFPath="D:/DailyReportResourceFiles/20170912/ACZone Shipment Folder Txn Report.xlsx";
-		String ACZonePath="D:/DailyReportResourceFiles/20170912/ACZone TXN Monitor.xlsx";
-		String UserSyncPath="D:/DailyReportResourceFiles/20170912/Report - Coscon User Profile Sync Txn Report.xlsx";
-		String STDZonePath="D:/DailyReportResourceFiles/20170912/STDZone COSCON BR SI Daily TXN Report.xlsx";
+		String SFPath="D:/DailyReportResouceFiles/20170912/ACZone Shipment Folder Txn Report.xlsx";
+		String ACZonePath="D:/DailyReportResouceFiles/20170912/ACZone TXN Monitor.xlsx";
+		String UserSyncPath="D:/DailyReportResouceFiles/20170912/Report - Coscon User Profile Sync Txn Report.xlsx";
+		String STDZonePath="D:/DailyReportResouceFiles/20170912/STDZone COSCON BR SI Daily TXN Report.xlsx";
 		
         int []data=new int[10];
 		//ªÒ»°SF

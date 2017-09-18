@@ -17,13 +17,13 @@ public class UnZipFile {
      * @param descDir   指定目录 
      */  
     public void unZipFiles(String yesterday) throws IOException {
-    	String zipFilePath="D:/DailyReportResourceFiles/"+yesterday+"/COSCON Network Utilization.zip";
+    	String zipFilePath="D:/DailyReportResouceFiles/"+yesterday+"/COSCON Network Utilization.zip";
     	File zipFile=new File(zipFilePath);
     	if(!zipFile.exists()){
     		System.out.println("zipFilePath :"+zipFilePath+"does not exits");
     	    return;
     	}
-    	String descDir="D:/DailyReportResourceFiles/"+yesterday+"/";
+    	String descDir="D:/DailyReportResouceFiles/"+yesterday+"/";
         ZipFile zip = new ZipFile(zipFile);//指定编码格式，可以解决中文文件夹乱码  
         String name = zip.getName().substring(zip.getName().lastIndexOf('\\')+1, zip.getName().lastIndexOf('.'));  
           
