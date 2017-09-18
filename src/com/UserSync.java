@@ -14,7 +14,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class UserSync {
 	public void writeUserSync(String excelPath,String sheetName,int dayNum){
-		String UserSyncPath="D:/DailyReportResourceFiles/20170912/Report - Coscon User Profile Sync Txn Report.xlsx";
+		String UserSyncPath="D:/DailyReportResouceFiles/20170912/Report - Coscon User Profile Sync Txn Report.xlsx";
 		
         try { 
             //读取UserSync
@@ -45,27 +45,47 @@ public class UserSync {
             style.setBorderRight(CellStyle.BORDER_THIN);// 右边框
             style.setAlignment(XSSFCellStyle.ALIGN_CENTER);
             int columnNum=0,param=0;
-            if(dayNum==6||dayNum==7){
-            	columnNum=4*dayNum-18;
-            	param=3;
-            }else if(dayNum==5){
-            	System.out.println("需要比较");
-            }else if(dayNum==4){
-            	param=31;
-            }else if(dayNum<4){
-            	columnNum=4*dayNum-2;
-            	if(columnNum==2) columnNum=0;
-            	param=17;
+            if(dayNum==5){//Friday
+            	for(int i=1;i<temp.length;i++){
+                	for(int j=3+i;j<=13;j++){
+                		XSSFRow xr=ws.getRow(j);
+                		String code=xr.getCell(0).getStringCellValue();
+                		String result=xr.getCell(1).getStringCellValue();
+                		XSSFCell xc=null;
+                		if(temp[i][0].equals(code)&&temp[i][1].equals(result)){
+                			xc=xr.createCell(2);
+                			xc.setCellStyle(style);
+                			xc.setCellValue(temp[i][2]);
+                		}else{
+                			xc=xr.createCell(2);
+                			xc.setCellStyle(style);
+                			xc.setCellValue("0");
+                		}
+                	}	
+                }
+            }else{
+            	if(dayNum==6||dayNum==7){
+                	columnNum=4*dayNum-18;
+                	param=3;
+                }else if(dayNum==4){
+                	param=31;
+                }else if(dayNum<4){
+                	columnNum=4*dayNum-2;
+                	if(columnNum==2) columnNum=0;
+                	param=17;
+                }
+            	
+            	for(int i=1;i<temp.length;i++){//注意,表格不能为空,否则报空指针异常
+                	XSSFRow xr=ws.getRow(i+param);
+                	for(int j=0;j<3;j++){
+                		XSSFCell xc=xr.createCell(columnNum+j);
+                		xc.setCellStyle(style);
+                		xc.setCellValue(temp[i][j]);
+                	}
+                }
             }
             
-            for(int i=1;i<temp.length;i++){//注意,表格不能为空,否则报空指针异常
-            	XSSFRow xr=ws.getRow(i+param);
-            	for(int j=0;j<3;j++){
-            		XSSFCell xc=xr.createCell(columnNum+j);
-            		xc.setCellStyle(style);
-            		xc.setCellValue(temp[i][j]);
-            	}
-            }
+            
             this.fileWrite(excelPath, wb); 
             fis.close(); 
         } catch (Exception e) { 
@@ -94,12 +114,13 @@ public class UserSync {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		UserSync us=new UserSync();
-		us.writeUserSync("D:/DailyReportResourceFiles/Report/22.xlsx","UserSync",1);
-		us.writeUserSync("D:/DailyReportResourceFiles/Report/22.xlsx","UserSync",2);
-		us.writeUserSync("D:/DailyReportResourceFiles/Report/22.xlsx","UserSync",3);
-		us.writeUserSync("D:/DailyReportResourceFiles/Report/22.xlsx","UserSync",4);
-		us.writeUserSync("D:/DailyReportResourceFiles/Report/22.xlsx","UserSync",6);
-		us.writeUserSync("D:/DailyReportResourceFiles/Report/22.xlsx","UserSync",7);
+		us.writeUserSync("D:/DailyReportResouceFiles/Report/22.xlsx","UserSync",5);
+//		us.writeUserSync("D:/DailyReportResouceFiles/Report/22.xlsx","UserSync",1);
+//		us.writeUserSync("D:/DailyReportResouceFiles/Report/22.xlsx","UserSync",2);
+//		us.writeUserSync("D:/DailyReportResouceFiles/Report/22.xlsx","UserSync",3);
+//		us.writeUserSync("D:/DailyReportResouceFiles/Report/22.xlsx","UserSync",4);
+//		us.writeUserSync("D:/DailyReportResouceFiles/Report/22.xlsx","UserSync",6);
+//		us.writeUserSync("D:/DailyReportResouceFiles/Report/22.xlsx","UserSync",7);
 	}
 
 }

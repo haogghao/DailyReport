@@ -20,7 +20,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ExcelWrite {
-    public static String excelPath="D:/DailyReportResourceFiles/Report/22.xlsx";
+    public static String excelPath="D:/DailyReportResouceFiles/Report/22.xlsx";
 	public void clearSheet(String excelPath,String sheetName) {
         try { 
             FileInputStream fis = new FileInputStream(excelPath); 
@@ -46,17 +46,20 @@ public class ExcelWrite {
             
             if(sheetName.equals("UserSync")){//清空数据及样式
             	System.out.println("UserSync");
+            	
             	for(int i=4;i<=13;i++){
             		XSSFRow tempRow = ws.getRow(i);
-            		for(int j=6;j<=13;j++){
+            		for(int j=6;j<=12;j++){
+            			if(j==9) continue;
             			XSSFCell xc=tempRow.createCell(j);
             			xc.setCellStyle(style);
             			xc.setCellValue("");
             		}
             	}
-            	for(int i=18;i<=29;i++){
+            	for(int i=18;i<=27;i++){
             		XSSFRow tempRow = ws.createRow(i);
-            		for(int j=1;j<=13;j++){
+            		for(int j=0;j<=12;j++){
+            			if(j==3||j==4||j==5||j==9) continue;
             			XSSFCell xc=tempRow.createCell(j);
             			xc.setCellStyle(style);
             			xc.setCellValue("");
@@ -64,7 +67,7 @@ public class ExcelWrite {
             	}
             	for(int i=32;i<=41;i++){
             		XSSFRow tempRow = ws.createRow(i);
-            		for(int j=1;j<=3;j++){
+            		for(int j=0;j<=3;j++){
             			XSSFCell xc=tempRow.createCell(j);
             			xc.setCellStyle(style);
             			xc.setCellValue("");
